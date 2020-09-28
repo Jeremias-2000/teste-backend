@@ -13,6 +13,8 @@ public interface RequestPet {
     @GetMapping("/pesquisar/{id}")
     ResponseEntity<?> petEspecifico(@PathVariable("id") int id);
 
+
+
     @PostMapping("/cadastrar")
     ResponseEntity<?> save(@Validated @RequestBody Pet pet);
 

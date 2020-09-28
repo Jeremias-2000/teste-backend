@@ -2,10 +2,12 @@ package com.development.testebackend.service;
 
 import com.development.testebackend.model.Cliente;
 import com.development.testebackend.repository.ClienteRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -17,6 +19,20 @@ public class ClienteService {
     }
     public Cliente procurarCliente(int id){
         return repo.findById(id).orElse(null);
+    }
+    public List<Cliente> procurarClienteNome(String name){
+        List<Cliente> search = repo.findByNameStartingWith(name);
+        if (search == null){
+            return null;
+        }
+        return search;
+    }
+    public List<Cliente> procurarClienteEmail(String email){
+            List<Cliente> search = repo.findByEmailStartingWith(email);
+            if (search == null){
+                return null;
+            }
+            return search;
     }
 
     public String cadastrarCliente(Cliente cliente){
