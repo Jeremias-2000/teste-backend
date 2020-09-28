@@ -1,7 +1,7 @@
 package com.development.testebackend.service;
 
 import com.development.testebackend.model.Pet;
-import com.development.testebackend.repository.ClienteRepository;
+
 import com.development.testebackend.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +18,19 @@ public class PetService {
         return repository.findAll();
     }
 
-    public Pet procurarPet(int id){
-       return repository.findById(id).orElse(null);
+    public String procurarPet(int id){
+       Pet search = repository.findById(id).orElse(null);
+       if (search == null){
+           return "Pet não encontrado" + id;
+       }
+       return "Pet encontrado \n" + search;
     }
+
+
 
     public String cadastrarPet(Pet pet) {
         repository.save(pet);
-        return "cadastro efetuado com sucesso";
+        return "cadastro efetuado com sucesso !";
     }
 
     public String atualizarPet(int id, Pet update) {
@@ -39,9 +45,13 @@ public class PetService {
             return "Atualização finalizada com sucesso !";
         }
     }
-    public void deletarPet(int id){
+    public String deletarPet(int id){
         Pet search = repository.findById(id).orElse(null);
+        if (search == null){
+            return "Pet não encontrado !";
+        }
         repository.delete(search);
+        return "Pet deletado com sucesso !";
     }
 
 }

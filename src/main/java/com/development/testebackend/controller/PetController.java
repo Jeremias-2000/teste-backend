@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RequestMapping("/api/v1/pet")
@@ -25,18 +26,19 @@ public class PetController implements RequestPet{
     public ResponseEntity<?> petEspecifico(int id)
     {
         try{
-            Pet pet = service.procurarPet(id);
-            return new ResponseEntity<>(pet, HttpStatus.OK);
+            return new ResponseEntity<>(service.procurarPet(id), HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
         }
 
     }
 
+
+
     @Override
     public ResponseEntity<?> save(Pet pet) {
-        service.cadastrarPet(pet);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        return new ResponseEntity<>(service.cadastrarPet(pet),HttpStatus.CREATED);
 
     }
 
@@ -44,10 +46,10 @@ public class PetController implements RequestPet{
     @Override
     public ResponseEntity<?> updatePet(int id, Pet pet) {
         try{
-            service.atualizarPet(id,pet);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new ResponseEntity<>(service.atualizarPet(id,pet),HttpStatus.OK);
         }catch (NoSuchElementException e){
-         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+         return new ResponseEntity<>(service.atualizarPet(id,pet),HttpStatus.NOT_FOUND);
         }
 
     }
@@ -55,10 +57,10 @@ public class PetController implements RequestPet{
     @Override
     public ResponseEntity<?> deletarPet(int id) {
         try {
-            service.deletarPet(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            return new ResponseEntity<>(service.deletarPet(id),HttpStatus.OK);
         }catch (NoSuchElementException e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(service.deletarPet(id),HttpStatus.NOT_FOUND);
         }
 
     }

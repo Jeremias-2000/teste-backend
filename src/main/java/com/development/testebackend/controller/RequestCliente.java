@@ -7,16 +7,22 @@ import org.springframework.web.bind.annotation.*;
 
 public interface RequestCliente {
 
-    @GetMapping("/listar/clientes")
+    @GetMapping("/listar")
     ResponseEntity<?> listarClientes();
 
-    @GetMapping("/pesquisar/cliente/{id}")
+    @GetMapping("/pesquisar/{id}")
     ResponseEntity<?> Clienteespecifico(@PathVariable("id") int id);
 
-    @PostMapping("/cadastrar/cliente")
+    @GetMapping("/pesquisar/nome/{nome}")
+    ResponseEntity<?> buscarClienteNome(@PathVariable("nome") String nome);
+
+    @GetMapping("/pesquisar/email/{email}")
+    ResponseEntity<?> BuscarClienteEmail(@PathVariable("email") String email);
+
+    @PostMapping("/cadastrar")
     ResponseEntity<?> salvarCliente(@Validated @RequestBody Cliente cliente);
 
-    @PutMapping("/atualizar/cliente/{id}")
+    @PutMapping("/atualizar/{id}")
     ResponseEntity<?> atualizarCliente(@PathVariable("id") int id, @Validated @RequestBody Cliente cliente);
 
     @DeleteMapping("/deletar/{id}")
