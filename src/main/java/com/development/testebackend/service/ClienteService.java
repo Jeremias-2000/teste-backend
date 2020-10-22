@@ -2,17 +2,22 @@ package com.development.testebackend.service;
 
 import com.development.testebackend.model.Cliente;
 import com.development.testebackend.repository.ClienteRepository;
-import org.hibernate.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ClienteService {
     @Autowired
     ClienteRepository repo;
+
+    public ClienteService(ClienteRepository repository) {
+        this.repo = repository;
+    }
+
 
     public List<Cliente> listar(){
         return  repo.findAll();
@@ -35,9 +40,10 @@ public class ClienteService {
             return search;
     }
 
-    public String cadastrarCliente(Cliente cliente){
-        repo.save(cliente);
-        return "Cadastro efetuado com sucesso !";
+    public Object cadastrarCliente(Cliente cliente){
+        return repo.save(cliente);
+
+
     }
 
     public String atualizarCliente(int id, Cliente cliente){
