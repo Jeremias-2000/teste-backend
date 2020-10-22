@@ -27,12 +27,12 @@ Para o funcionamento correto todos os requerimentos devem estar devidamente inst
 
 Para clonar esse repositório em sua máquina  basta abrir seu gitbash ou seu terminal linux com o git instalado e digitar o seguinte comando:
 ```sh
-$ git pull
+$ git pull https://github.com/Jeremias-2000/teste-backend.git
 ```
 Para você contribuir com esse repositório...
 
 ```sh
-$ git clone
+$ git clone https://github.com/Jeremias-2000/teste-backend.git
 ```
 
 ### Como rodar
